@@ -27,14 +27,17 @@ for ext in EXTENSIONS:
     for f in recursive_glob(MEDIA_DIRECTORY, '*.%s' % ext):
         tid += 1
         thumbnail = 'thumbs/%d.jpg' % tid
-        os.system(THUMBNAIL_COMMAND % (f, thumbnail))  # TODO: insecure
-        videos.append(dict(
-            description='Description (TODO)',
-            title=f,
-            sources=['http://%s/%s' % (HOSTNAME, f)],
-            thumb=thumbnail,
-            subtitle='Subtitle (TODO)'
-        ))
+        status = os.system(THUMBNAIL_COMMAND % (f, thumbnail))  # TODO: insecure
+        if status == 0:
+            videos.append(dict(
+                description='Description (TODO)',
+                title=f,
+                sources=['http://%s/%s' % (HOSTNAME, f)],
+                thumb=thumbnail,
+                subtitle='Subtitle (TODO)'
+            ))
+        else:
+            print 'Error generating thumbnail for "%s". Skipping video...' % f
 
 print videos
 import json
