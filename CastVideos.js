@@ -113,7 +113,7 @@ var CastPlayer = function() {
   this.timerStep = 1000;
 
   /* media contents from JSON */
-  this.mediaContents = null;
+  this.mediaContents = mediaJSON;
 
   this.initializeCastPlayer();
   this.initializeLocalPlayer();
@@ -1101,7 +1101,6 @@ CastPlayer.prototype.onMediaJsonError = function() {
  * Add video thumbnails div's to UI for media JSON contents 
  */
 CastPlayer.prototype.addVideoThumbs = function() {
-  this.mediaContents = mediaJSON;
   var ni = document.getElementById('carousel');
   var newdiv = null;
   var newdivBG = null;
